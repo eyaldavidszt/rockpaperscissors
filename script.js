@@ -29,21 +29,16 @@ function calcRound(computer) {
   if (player == "rock") {
     if (computer == "scissors") {
         // player wins
-        result.push("Player wins! Rock beats Scissors");
-        result.push("1");
-        return result;
+        return ["Player wins! Rock beats Scissors", "1"];
     }
     else if (computer == "paper") {
         // computer wins
-        result.push("Computer wins! Paper beats Rock");
-        result.push("0");
-        return result;
+        return ["Computer wins! Paper beats Rock", "0"];
+
     }
     else {
         // draw
-        result.push("Draw");
-        result.push("2");
-        return result;
+        return ["Draw!", "2"];
     }
   }
   if (player == "paper") {
@@ -71,7 +66,7 @@ function calcRound(computer) {
     }
     else {
         // draw
-        return ["Draw", "2"];
+        return ["Draw!", "2"];
     }
   }
 }
@@ -81,7 +76,7 @@ function game() {
     let count_cpu = 0;
     let count_human = 0;
     for (let i = 0; i < 5; i++) {
-        list = calcRound(getComputerChoice());
+        let list = calcRound(getComputerChoice());
         if (list[1] == 0) {
             count_cpu++;
         }
