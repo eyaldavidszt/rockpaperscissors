@@ -20,7 +20,6 @@ function getComputerChoice() {
 
 //this function prompts a user for an input and returns an appropriate string for a result plus a result "code".
 function calcRound(computer) {
-    let result = [];
     let response = prompt("Choose rock, paper, or scissors: ");
     const player = response.toLowerCase();
 
