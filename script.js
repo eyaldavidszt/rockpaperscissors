@@ -17,14 +17,8 @@ function getComputerChoice() {
 //i need to take in the player choice and input it into the function that compares it with the computer's
 //how do i store the player choice in a variable
 
-
 //this function prompts a user for an input and returns an appropriate string for a result plus a result "code".
-function calcRound(computer) {
-    let response = prompt("Choose rock, paper, or scissors: ");
-    const player = response.toLowerCase();
-
-
-    
+function calcRound(computer, player) {
   if (player == "rock") {
     if (computer == "scissors") {
         // player wins
@@ -69,32 +63,70 @@ function calcRound(computer) {
     }
   }
 }
-//this function calls the round functions, and stores the return value in a variable. it checks who won the round and increments the appropriate player's win count
-//we do this 5 times and then we compare the two win counts.
-function game() {
-    let count_cpu = 0;
-    let count_human = 0;
-    for (let i = 0; i < 5; i++) {
-        let list = calcRound(getComputerChoice());
-        if (list[1] == 0) {
-            count_cpu++;
-        }
-        else if (list[1] == 1) {
-            count_human++;
-        }
-        console.log(list[0]);
+// select button and add event listener. that event will go off on click and will record the choice. 
+// send the class 
+let buttons = document.querySelectorAll("button.choice");
 
+let container = document.querySelector(".container");
+let humanDiv = document.querySelector(".human-div");
+let compDiv = document.querySelector(".comp-div");
+let drawDiv = document.querySelector(".draw-div");
+let resultDiv = document.querySelector(".result-div");
+
+
+
+let countCpu = 0;
+let countHuman = 0;
+let draw = 0;
+
+function getResult () {
+    let playerChoice = this.getAttribute('id'); 
+    let list = calcRound(getComputerChoice(), playerChoice);
+    if (list[1] == 0) {
+        countCpu++;
     }
-    if (count_cpu > count_human) {
-        console.log("Computer wins");
-    }
-    else if (count_human > count_cpu) {
-        console.log("Human wins");
+    else if (list[1] == 1)
+    {
+        countHuman++;
     }
     else {
-        console.log("It's a draw");
+        draw++;
+    }       
+    humanDiv.textContent = `Player: ${countHuman}`;
+    compDiv.textContent = `Computer: ${countCpu}`;
+    drawDiv.textContent= `Drawn: ${draw}`;
+    // if any score = 5, disable the buttons. have a "play again" button which enables them onclick and resets the scores.
+    if (countCpu == 5 || countHuman == 5)
+    {
+        buttons.forEach(button => {
+            button.setAttribute("disabled", "true");
+        });
+        countCpu == 5 ? 
+        resultDiv.append("Game over, computer won") :
+        resultDiv.append("Game over, player won");
     }
+
 }
 
-//actually calling the game function which will call the round function 5 times and look at it's results to increment player's win counts each time
-game();
+buttons.forEach(button => {
+    button.addEventListener("click", getResult);
+});
+
+//
+let playAgain = document.querySelector(".reset");
+playAgain.addEventListener("click", resetGame);
+
+function resetGame () {
+    buttons.forEach(button => {
+        button.removeAttribute("disabled");
+    });
+    countCpu = 0;
+    countHuman = 0;
+    draw = 0;
+    humanDiv.textContent = `Player: ${countHuman}`;
+    compDiv.textContent = `Computer: ${countCpu}`;
+    drawDiv.textContent = `Drawn: ${draw}`;
+    resultDiv.textContent = "";
+}
+
+
