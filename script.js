@@ -71,6 +71,7 @@ let container = document.querySelector(".container");
 let humanDiv = document.querySelector(".human-div");
 let compDiv = document.querySelector(".comp-div");
 let drawDiv = document.querySelector(".draw-div");
+let currentRound = document.querySelector(".current-round-div");
 let resultDiv = document.querySelector(".result-div");
 
 
@@ -91,7 +92,9 @@ function getResult () {
     }
     else {
         draw++;
-    }       
+    }
+    
+    currentRound.textContent = `${list[0]}`;
     humanDiv.textContent = `Player: ${countHuman}`;
     compDiv.textContent = `Computer: ${countCpu}`;
     drawDiv.textContent= `Drawn: ${draw}`;
@@ -105,7 +108,6 @@ function getResult () {
         resultDiv.append("Game over, computer won") :
         resultDiv.append("Game over, player won");
     }
-
 }
 
 buttons.forEach(button => {
@@ -127,6 +129,7 @@ function resetGame () {
     compDiv.textContent = `Computer: ${countCpu}`;
     drawDiv.textContent = `Drawn: ${draw}`;
     resultDiv.textContent = "";
+    currentRound.textContent ="";
 }
 
 
