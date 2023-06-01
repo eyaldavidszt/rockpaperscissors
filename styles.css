@@ -34,7 +34,7 @@ button {
     background-color: white;
     border: 3px solid black;
     user-select: none;
-
+    -webkit-user-select: none;
 }
 
 ::selection {
