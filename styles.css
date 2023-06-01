@@ -7,17 +7,21 @@ body {
     display: flex;
     flex-direction: column;
     gap: 16px;
-
     font-family: 'pixel';
 }
 
 .choices {
-    height: 200px;
+    height: 300px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 16px;
+}
+
+.choices > * {
+    height: 100px;
+    width: 200px;
 }
 .container {
     display: flex;
@@ -47,7 +51,6 @@ button {
 
 .reset {
     font-size: 16px;
-    height: 80px;
 }
 
 button:active {
